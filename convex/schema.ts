@@ -30,3 +30,8 @@ export default defineSchema({
     interviewId: v.id("interviews"),
   }).index("by_interview_id", ["interviewId"]),
 });
+
+
+
+/// jwt
+// https://sweeping-beetle-48.clerk.accounts.dev

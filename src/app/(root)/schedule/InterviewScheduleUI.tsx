@@ -176,8 +176,8 @@ function InterviewScheduleUI() {
               {/* CANDIDATE */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">Candidate</label>
-                <Select
-                  value={formData.candidateId}
+                {/* <Select
+                  value={formData.candidateId || undefined}
                   onValueChange={(candidateId) => setFormData({ ...formData, candidateId })}
                 >
                   <SelectTrigger>
@@ -190,7 +190,51 @@ function InterviewScheduleUI() {
                       </SelectItem>
                     ))}
                   </SelectContent>
-                </Select>
+                </Select> */}
+
+                  {/* /// Vishal starts */}
+
+                  <Select
+  value={formData.candidateId || undefined} // Ensure no empty string
+  onValueChange={(candidateId) => setFormData({ ...formData, candidateId })}
+>
+  <SelectTrigger>
+    <SelectValue placeholder="Select candidate" />
+  </SelectTrigger>
+  <SelectContent>
+    {candidates
+      ?.filter((candidate) => candidate.clerkId) // Remove invalid entries
+      .map((candidate) => (
+        <SelectItem key={candidate.clerkId} value={candidate.clerkId}>
+          <UserInfo user={candidate} />
+        </SelectItem>
+      ))}
+  </SelectContent>
+</Select>
+
+<Select
+  value={formData.time || undefined} // Ensure no empty string
+  onValueChange={(time) => setFormData({ ...formData, time })}
+>
+  <SelectTrigger>
+    <SelectValue placeholder="Select time" />
+  </SelectTrigger>
+  <SelectContent>
+    {TIME_SLOTS
+      ?.filter((time) => time) // Remove empty values
+      .map((time) => (
+        <SelectItem key={time} value={time}>
+          {time}
+        </SelectItem>
+      ))}
+  </SelectContent>
+</Select>
+
+
+{/* 
+                  /// Vishal Ends */}
+
+
               </div>
 
               {/* INTERVIEWERS */}
